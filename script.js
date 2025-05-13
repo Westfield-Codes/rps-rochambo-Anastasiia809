@@ -1,24 +1,27 @@
 var score = [0,0];
 function main() {
-    let winner = "";
-    let rounds = setRounds();
-    if (round <= rounds) {
-        winner = rpsRound();
-        score[winner]++;
+  let winner = "";
+  let rounds = setRounds();
+  for (let round=1;round <= rounds;round++) {
+    winner = rpsRound();
+    score[winner]++;
     }
-
+  alert("You have " + score[0] + " and I have " + score[1]);
+  // if (score[0]>score[1]) alert("You win!");
+  // else alert("I win!"); 
 }
 function setRounds() {
-    let rounds = prompt("Number of rounds?");
-   if (rounds % 2 == 0) { 
+  let rounds = prompt("Number of rounds?");
+  if (rounds % 2 == 0) { 
     alert("must be odd, try again");
-   return setRounds();
+    return setRounds();
    }
    return rounds;
 }
 /* RPS rounds plays round of rps and tells the winner
+*returns the index (0,1) in score for the winner
 * @param: none
-*@return:none
+* @return:winner (0 or 1)
 */
 function rpsRound() {
     let u = "";
@@ -31,13 +34,17 @@ function rpsRound() {
     }
   }
   winner = findWinner(u,c);
-  alert("You chose " + u + " and I chose "+ c  +  winner  +  " won");  
+  alert("You chose " + u + " and I chose "+ c +" so " + winner  +  " won");  
+  let winValues = ["You","I"];
+  winner = winValues.indexOf(winner);
+  return winner;
 }
-// userturn
-// user can choose r, p, or s.
-// if bad Input, give new choice
-// @param:none
-// @return:choice
+/* userturn
+* user can choose r, p, or s.
+* if bad Input, give new choice
+* @param:none
+* @return:choice
+*/ 
 function userTurn() {
     let choice = prompt("enter r, p, or s");
     const turn = ["r","p","s"];
