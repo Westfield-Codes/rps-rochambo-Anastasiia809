@@ -34,7 +34,7 @@ function rpsRound() {
     }
   }
   winner = findWinner(u,c);
-  alert("You chose " + u + " and I chose "+ c +" so " + winner  +  " won");  
+  alert("You chose " + u + " and I chose "+ c +" , so " + winner  +  " won");  
   let winValues = ["You","I"];
   winner = winValues.indexOf(winner);
   return winner;
