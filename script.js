@@ -24,8 +24,8 @@ function setRounds() {
 * @return:winner (0 or 1)
 */
 function rpsRound() {
-    let u = "";
-  let c ="";
+  let u = "";
+  let c = "";
   while (u == c) {
     u = userTurn();
     c = cpuTurn();
@@ -33,10 +33,10 @@ function rpsRound() {
       alert("We both chose "  + c);
     }
   }
-  winner = findWinner(u,c);
-  alert("You chose " + u + " and I chose "+ c +" , so " + winner  +  " won");  
+  winner = findWinner(u,c);  
   let winValues = ["You","I"];
-  winner = winValues.indexOf(winner);
+  winner = winValues[winner];
+  alert("You chose " + u + " and I chose "+ c +" , so " + winnerWord  +  " won");
   return winner;
 }
 /* userturn
@@ -73,7 +73,7 @@ function findWinner(u,c) {
   let combo = u + c;
   let match = "";
   let winner = "";
-  let winArray = [["r","p","I"],["r","s","You"],["s","r","I"],["s","p","You"],["p","s","I"],["p","r","You"]];
+  let winArray = [["r","p",0],["r","s",1],["s","r",0],["s","p",1],["p","s",0],["p","r",1]];
   for (let i =0;i < winArray.length;i++) {
     match = winArray[i][0]+winArray[i][1];
     if (match == combo) {
