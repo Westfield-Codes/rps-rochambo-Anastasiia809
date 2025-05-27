@@ -1,7 +1,24 @@
+/*ui*/
+//hide start button after click
+//paragraph with instructions
+//add input box
+//add submit button
+//submit calls setRounds()
+//setRounds() needs to get value from the input box
+
 /* Global Variables */
 let score = [0,0];
+function setUp() {
+  let start =  document.createElement("button");
+  start.innerHTML = "Play rps";
+  start.addEventListener('click',playRps){
+    this.remove();
+  }
+  document.body.appendChild(start);
+  
+}
 
-function main(){
+function playRps(){
   let winner = "";
   let rounds = setRounds();
   for (let round = 1; round <= rounds; round++){
