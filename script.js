@@ -7,7 +7,8 @@
 //setRounds() needs to get value from the input box
 
 /* Global Variables */
-let score = [0,0];
+var score = [0,0];
+var turn = [0,0];
 function setUp() {
   let start =  document.createElement("button");
   start.innerHTML = "Play rps";
@@ -21,6 +22,7 @@ function playRps(){
   start.remove();
   let paragraph = document.createElement("p");
   paragraph.innerHTML="enter an odd number to play";
+  paragraph.id="message";
   document.body.appendChild(paragraph);
   let input = document.createElement("input");
   input.id="input";
@@ -47,17 +49,44 @@ function getRounds() {
   let rounds = document.getElementById("input");
   rounds = rounds.value;
   console.log(rounds);
+  setRounds(rounds);
 }
 
-function setRounds() {
-  //  let rounds = prompt("Number of rounds?");
+function setRounds(rounds) {
    if (rounds % 2 == 0) {
-    // alert("must be odd, try again");
-    return setRounds();
+     let paragraph = document.getElementById("message");
+      paragraph.style.fontWeight="900";
+      paragraph.style.color="red";
+       let rounds = document.getElementById("input");
+       rounds.style.border= "thick solid red";
+       rounds.value="";
    }
-   return rounds;
+    // getRounds();
+    else {
+      document.body.innerHTML="";
+      makeButtons();
+   }
 }
 
+function makeButtons() {
+  let rock = document.createElement("button");
+  rock.innerHTML=("Rock");
+  document.body.appendChild(rock);
+  let paper = document.createElement("button");
+  paper.innerHTML=("Paper")
+  document.body.appendChild(paper);
+  let scissors = document.createElement("button");
+  scissors.innerHTML=("Scissors");
+  document.body.appendChild(scissors);
+}
+
+function pickRock() {
+  turn[0]="r";
+}
+
+function pickPaper() {
+  return "p";
+}
 /* RPS Round
  * Plays a round of RPS and tells the winner ("I" or "You") won.
  * Returns the index (0,1) in score for the winner.
@@ -79,22 +108,6 @@ function rpsRound() {
   winnerWord = winValues[winner];
   // alert("You chose " + u + " and I chose "+ c  +  ", so " + winnerWord  +  " won!"); 
   return winner; 
-}
-
-/* userturn
- * user can choose r, p, or s.
- * if bad Input, give new choice
- * @param:none
- * @return:choice
- */
-function userTurn() {
-    // let choice = prompt("enter r, p, or s");
-    const turn = ["r","p","s"];
-    if (!turn.includes(choice)) {
-        // alert("Invalid Input");
-        return userTurn();
-    }
-    return choice;
 }
 
 /* cpuTurn
