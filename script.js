@@ -69,23 +69,36 @@ function setRounds(rounds) {
 }
 
 function makeButtons() {
-  let rock = document.createElement("button");
-  rock.innerHTML=("Rock");
-  document.body.appendChild(rock);
-  let paper = document.createElement("button");
-  paper.innerHTML=("Paper")
-  document.body.appendChild(paper);
-  let scissors = document.createElement("button");
-  scissors.innerHTML=("Scissors");
-  document.body.appendChild(scissors);
+  let buttonArray =[["rock",pickRock],["paper",pickPaper],["scissors",pickScissors]];
+  for (let button = 0;button<buttonArray.length;button++){
+    let b = document.createElement("button");
+    b.innerHTML=(buttonArray[button][0]);
+    b.addEventListener("click",buttonArray[button][1]);
+    document.body.appendChild(b);
+  }
+}
+
+function playRound(u) {
+  let c=cpuTurn();
+  if (u == c) {
+    let message = document.createElement("p");
+    message.innerHTML="We both chose " + c;
+    document.body.appendChild(message); 
+  }
+  else findWinner();
 }
 
 function pickRock() {
-  turn[0]="r";
+  playRound("r");
 }
 
 function pickPaper() {
-  return "p";
+ playRound("p");
+
+}
+
+function pickScissors() {
+ playRound("s");
 }
 /* RPS Round
  * Plays a round of RPS and tells the winner ("I" or "You") won.
