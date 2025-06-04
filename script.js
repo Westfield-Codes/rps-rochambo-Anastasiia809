@@ -85,7 +85,7 @@ function playRound(u) {
     message.innerHTML="We both chose " + c;
     document.body.appendChild(message); 
   }
-  else findWinner();
+  else findWinner(u,c);
 }
 
 function pickRock() {
@@ -99,28 +99,6 @@ function pickPaper() {
 
 function pickScissors() {
  playRound("s");
-}
-/* RPS Round
- * Plays a round of RPS and tells the winner ("I" or "You") won.
- * Returns the index (0,1) in score for the winner.
- * @param: none
- * @return: winner (0 or 1)
- */
-function rpsRound() {
-    let u = "";
-    let c ="";
-    while (u == c) {
-        u = userTurn();
-        c = cpuTurn();
-        if (u ==c) {
-            // alert("We both chose "  + c);
-        }
-  }
-  winner = findWinner(u,c);
-  let winValues = ["You", "I"];
-  winnerWord = winValues[winner];
-  // alert("You chose " + u + " and I chose "+ c  +  ", so " + winnerWord  +  " won!"); 
-  return winner; 
 }
 
 /* cpuTurn
@@ -153,5 +131,7 @@ function findWinner(u,c) {
       break;
     }
   }
-  return winner;
+    let winValues = ["You", "I"];
+  winnerWord = winValues[winner];
+  alert("You chose " + u + " and I chose "+ c  +  ", so " + winnerWord  +  " won!"); 
 }
