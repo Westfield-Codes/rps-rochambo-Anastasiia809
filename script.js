@@ -18,19 +18,22 @@ function setUp() {
 }
 
 function playRps(){
+  let board = document.createElement("div");
+  board.id="board";
+  document.body.appendChild(board);
   let start = document.getElementById("start");
   start.remove();
   let paragraph = document.createElement("p");
   paragraph.innerHTML="enter an odd number to play";
   paragraph.id="message";
-  document.body.appendChild(paragraph);
+  board.appendChild(paragraph);
   let input = document.createElement("input");
   input.id="input";
   input.innerHTML="enter";
-  document.body.appendChild(input);
+  board.appendChild(input);
   let enter = document.createElement("button");
   enter.innerHTML = "confirm";
-  document.body.appendChild(enter);
+  board.appendChild(enter);
   enter.addEventListener("click",getRounds);
 
   // let winner = "";
@@ -63,27 +66,33 @@ function setRounds(rounds) {
    }
     // getRounds();
     else {
-      document.body.innerHTML="";
+      let board = document.getElementById("board");
+      board.innerHTML="";
       makeButtons();
    }
 }
 
 function makeButtons() {
+  let board = document.getElementById("board");
+  let buttons = document.createElement("buttons");
+  buttons.id="buttons";
+  board.appendChild(buttons); 
   let buttonArray =[["rock",pickRock],["paper",pickPaper],["scissors",pickScissors]];
   for (let button = 0;button<buttonArray.length;button++){
     let b = document.createElement("button");
     b.innerHTML=(buttonArray[button][0]);
     b.addEventListener("click",buttonArray[button][1]);
-    document.body.appendChild(b);
+    buttons.appendChild(b);
   }
 }
 
 function playRound(u) {
+  let board = document.getElementById("board");
   let c=cpuTurn();
   if (u == c) {
     let message = document.createElement("p");
     message.innerHTML="We both chose " + c;
-    document.body.appendChild(message); 
+    board.appendChild(message); 
   }
   else findWinner(u,c);
 }
@@ -133,5 +142,18 @@ function findWinner(u,c) {
   }
     let winValues = ["You", "I"];
   winnerWord = winValues[winner];
-  alert("You chose " + u + " and I chose "+ c  +  ", so " + winnerWord  +  " won!"); 
+  showScore(u,c,winnerWord);
 }
+
+function showScore(u,c, winner) {
+  let board = document.getElementById("board");
+  let header = document.createElement("div");
+  header.id="header";
+  let content = document.createElement("div");
+  content.id="content";
+  board.appendChild(header);
+  board.appendChild(content);
+  let message =   "You chose " + u + " and I chose "+ c  +  ", so " + winner  +  " won!"; 
+  content.innerHTML=message;
+}
+
