@@ -7,11 +7,22 @@
 //setRounds() needs to get value from the input box
 
 /* Global Variables */
+var round = 0;
+var rounds = 0;
 var score = [0,0];
 var turn = [0,0];
 function setUp() {
   let start =  document.createElement("button");
   start.innerHTML = "Play rps";
+  start.style.margin = "10px";
+  start.style.color = "#A09C5F";
+  start.style.fontSize = "100px";
+  start.style.position = 'absolute';
+  start.style.left = '50%';
+  start.style.top = '50%';
+  start.style.transform = 'translate(-50%, -50%)';
+  start.style.border = "thick solid #5F5CA3"
+  start.style.backgroundColor = "#5F5CA3";
   start.addEventListener("click",playRps);
   start.id="start";
   document.body.appendChild(start);
@@ -26,15 +37,26 @@ function playRps(){
   let paragraph = document.createElement("p");
   paragraph.innerHTML="enter an odd number to play";
   paragraph.id="message";
+  paragraph.style.color ="#5F5CA3";
   board.appendChild(paragraph);
   let input = document.createElement("input");
   input.id="input";
+  input.style.border = "thin  solid #A09C5F";
+  input.style.backgroundColor = "#5F5CA3";
+  input.style.color = "#A09C5F";
   input.innerHTML="enter";
   board.appendChild(input);
   let enter = document.createElement("button");
   enter.innerHTML = "confirm";
+  enter.style.margin = "10px";
+  enter.style.backgroundColor = "#5F5CA3";
+  enter.style.color = "#A09C5F";
+  enter.style.border = "thin solid #5F5CA3";
   board.appendChild(enter);
   enter.addEventListener("click",getRounds);
+  input.style.fontSize = "30px";
+  enter.style.fontSize = "30px";
+  board.style.fontSize = "30px";
 
   // let winner = "";
   // let rounds = setRounds();
@@ -49,7 +71,7 @@ function playRps(){
 }
 
 function getRounds() {
-  let rounds = document.getElementById("input");
+  rounds = document.getElementById("input");
   rounds = rounds.value;
   console.log(rounds);
   setRounds(rounds);
@@ -147,6 +169,7 @@ function findWinner(u,c) {
 
 function showScore(u,c, winner) {
   let board = document.getElementById("board");
+  round++;
   let header = document.createElement("div");
   header.id="header";
   let content = document.createElement("div");
@@ -155,5 +178,7 @@ function showScore(u,c, winner) {
   board.appendChild(content);
   let message =   "You chose " + u + " and I chose "+ c  +  ", so " + winner  +  " won!"; 
   content.innerHTML=message;
+  if (round==rounds){
+    console.log("end game");
+  }
 }
-
