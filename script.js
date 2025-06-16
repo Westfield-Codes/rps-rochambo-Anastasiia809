@@ -105,7 +105,6 @@ function makeButtons() {
     b.innerHTML=(buttonArray[button][0]);
     b.addEventListener("click",buttonArray[button][1]);
     buttons.appendChild(b);
-  }
 }
 
 function playRound(u) {
@@ -190,5 +189,6 @@ function showScore(u,c, winner) {
       content.innerHTML=message+"<br>"+information;
     // board.remove();
     // setUp();
+    }
   }
 }
