@@ -154,7 +154,7 @@ function findWinner(u,c) {
   let combo = u + c;
   let match = "";
   let winner = "";
-  let winArray = [["r","p",0],["r","s",1],["s","r",0],["s","p",1],["p","s",0],["p","r",1]];
+  let winArray = [["r","p",1],["r","s",0],["s","r",1],["s","p",0],["p","s",1],["p","r",0]];
   for (let i =0;i < winArray.length;i++) {
     match = winArray[i][0]+winArray[i][1];
     if (match == combo) {
@@ -162,7 +162,8 @@ function findWinner(u,c) {
       break;
     }
   }
-    let winValues = ["You", "I"];
+  score[winner]++;
+  let winValues = ["You", "I"];
   winnerWord = winValues[winner];
   showScore(u,c,winnerWord);
 }
@@ -176,9 +177,18 @@ function showScore(u,c, winner) {
   content.id="content";
   board.appendChild(header);
   board.appendChild(content);
-  let message =   "You chose " + u + " and I chose "+ c  +  ", so " + winner  +  " won!"; 
+  let message = "You chose " + u + " and I chose "+ c  +  ", so " + winner  +  " won!"; 
   content.innerHTML=message;
   if (round==rounds){
-    console.log("end game");
+    let information = "";
+    if (score[0] > score[1]) {
+      information = "You won "+ score[0] + " to " + score[1];
+    }
+    else {
+       information = "I won "+ score[1] + " to " + score[0];
+    }
+      content.innerHTML=message+"<br>"+information;
+    // board.remove();
+    // setUp();
   }
 }
